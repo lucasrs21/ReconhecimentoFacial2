@@ -53,4 +53,4 @@ RUNNING: -----------------------------------------------------------------------
 3.0) Run o código "train_model.py" usnado o terminal do vscode coloque:
 "python train_model.py --embeddings output/embeddings.pickle --recognizer output/recognizer.pickle --le output/le.pickle"
 4.0) Run o código "recognize_video.py" para detectar e reconhecer as faces.
-
+Ola aoskdoadskaos
