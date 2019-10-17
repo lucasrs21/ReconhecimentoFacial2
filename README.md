@@ -35,7 +35,7 @@ Bibliotecas:
 -open_cv2;
 -imutils;
 -sklearn;
--nativas: numpy, os, pickle;
+-nativas: numpy, os, pickle, argparse;
 
 ----------- melhorar README: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2 ----------
 
@@ -48,12 +48,9 @@ RUNNING: -----------------------------------------------------------------------
 1.0) Run o código "codigo_foto_por_video.py" (F5 no vscode/executando pelo terminal)
      1.1) Caso tenha um vídeo já gravado do seu rosto, coloque na pasta /Diretorio_Ambiente/videos com o
      nome do indivíduo a ser cadastrado
-
-2.0) Run o código "extract_embeddings.py" (F5 no vscode/executando pelo terminal);
-
-3.0) Run o código "train_model.py" (F5 no vscode/executando pelo terminal);
-
-4.0) Run o código "recognize_video.py" para detectar e reconhecer as faces (F5 no vscode/executando pelo terminal).
-
-ATENÇÃO : os arquivos devem se encontrar no mesmo diretório para que o código possa funcionar.
-
+2.0) Run o código "extract_embeddings.py" usando o terminal do vscode coloque:
+"python extract_embeddings.py --dataset dataset --embeddings output/embeddings.pickle --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7"
+3.0) Run o código "train_model.py" usnado o terminal do vscode coloque:
+"python train_model.py --embeddings output/embeddings.pickle --recognizer output/recognizer.pickle --le output/le.pickle"
+4.0) Run o código "recognize_video.py" para detectar e reconhecer as faces.
+Ola aoskdoadskaos
