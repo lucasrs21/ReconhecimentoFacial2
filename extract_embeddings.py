@@ -1,5 +1,5 @@
 # USAGE
-#  python extract_embeddings.py --dataset dataset --embeddings output/embeddings.pickle --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7
+# python extract_embeddings.py --dataset dataset --embeddings output/embeddings.pickle --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7
 
 # import the necessary packages
 from imutils import paths
@@ -10,34 +10,28 @@ import pickle
 import cv2
 import os
 
-# construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--dataset", required=True,
-	help="path to input directory of faces + images")
-ap.add_argument("-e", "--embeddings", required=True,
-	help="path to output serialized db of facial embeddings")
-ap.add_argument("-d", "--detector", required=True,
-	help="path to OpenCV's deep learning face detector")
-ap.add_argument("-m", "--embedding-model", required=True,
-	help="path to OpenCV's deep learning face embedding model")
-ap.add_argument("-c", "--confidence", type=float, default=0.9,
-	help="minimum probability to filter weak detections")
-args = vars(ap.parse_args())
+# pegando os arquivos necessários ao programa
+basedir = os.path.dirname(__file__)
+output = basedir + "/output"
+
+dataset = basedir + "/dataset"
+embeddings = output + "/embeddings.pickle"
+embedding_model = basedir + "/openface_nn4.small2.v1.t7"
+face_model = basedir + "/face_detection_model"
+
 
 # load our serialized face detector from disk
-print("[INFO] loading face detector...")
-protoPath = os.path.sep.join([args["detector"], "deploy.prototxt"])
-modelPath = os.path.sep.join([args["detector"],
-	"res10_300x300_ssd_iter_140000.caffemodel"])
+protoPath = face_model + "/deploy.prototxt"
+modelPath = face_model + "/res10_300x300_ssd_iter_140000.caffemodel"
 detector = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 
 # load our serialized face embedding model from disk
 print("[INFO] loading face recognizer...")
-embedder = cv2.dnn.readNetFromTorch(args["embedding_model"])
+embedder = cv2.dnn.readNetFromTorch(embedding_model)
 
 # grab the paths to the input images in our dataset
 print("[INFO] quantifying faces...")
-imagePaths = list(paths.list_images(args["dataset"]))
+imagePaths = list(paths.list_images(dataset))
 
 # initialize our lists of extracted facial embeddings and
 # corresponding people names
@@ -81,7 +75,7 @@ for (i, imagePath) in enumerate(imagePaths):
 		# ensure that the detection with the largest probability also
 		# means our minimum probability test (thus helping filter out
 		# weak detections)
-		if confidence > args["confidence"]:
+		if confidence > 0.9:
 			# compute the (x, y)-coordinates of the bounding box for
 			# the face
 			box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
@@ -112,6 +106,6 @@ for (i, imagePath) in enumerate(imagePaths):
 # dump the facial embeddings + names to disk
 print("[INFO] serializing {} encodings...".format(total))
 data = {"embeddings": knownEmbeddings, "names": knownNames}
-f = open(args["embeddings"], "wb")
+f = open(embeddings, "wb")
 f.write(pickle.dumps(data))
 f.close()

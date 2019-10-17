@@ -1,48 +1,41 @@
 # USAGE
-#  python recognize_video.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle
+# python recognize_video.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle
 
 # import the necessary packages
 from imutils.video import VideoStream
 from imutils.video import FPS
 import numpy as np
-import argparse
 import imutils
 import pickle
 import time
 import cv2
 import os
 
-##n = 0
+# pegando os arquivos necessários ao programa
+basedir = os.path.dirname(__file__)
+output = basedir + "/output"
+face_model = basedir + "/face_detection_model"
 
-# construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-d", "--detector", required=True,
-	help="path to OpenCV's deep learning face detector")
-ap.add_argument("-m", "--embedding-model", required=True,
-	help="path to OpenCV's deep learning face embedding model")
-ap.add_argument("-r", "--recognizer", required=True,
-	help="path to model trained to recognize faces")
-ap.add_argument("-l", "--le", required=True,
-	help="path to label encoder")
-ap.add_argument("-c", "--confidence", type=float, default=0.7,
-	help="minimum probability to filter weak detections")
-ap.add_argument("-f", "--fortify", type=float, default=0.35, help="segunda camada do filtro de falso-positivo")
-args = vars(ap.parse_args())
+dataset = basedir + "/dataset"
+embeddings = output + "/embeddings.pickle"
+embedding_model = basedir + "/openface_nn4.small2.v1.t7"
+
+label = output + "/le.pickle"
+recog = output + "/recognizer.pickle"
 
 # load our serialized face detector from disk
 print("[INFO] loading face detector...")
-protoPath = os.path.sep.join([args["detector"], "deploy.prototxt"])
-modelPath = os.path.sep.join([args["detector"],
-	"res10_300x300_ssd_iter_140000.caffemodel"])
+protoPath = face_model + "/deploy.prototxt"
+modelPath = face_model + "/res10_300x300_ssd_iter_140000.caffemodel"
 detector = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 
 # load our serialized face embedding model from disk
 print("[INFO] loading face recognizer...")
-embedder = cv2.dnn.readNetFromTorch(args["embedding_model"])
+embedder = cv2.dnn.readNetFromTorch(embedding_model)
 
 # load the actual face recognition model along with the label encoder
-recognizer = pickle.loads(open(args["recognizer"], "rb").read())
-le = pickle.loads(open(args["le"], "rb").read())
+recognizer = pickle.loads(open(recog, "rb").read())
+le = pickle.loads(open(label, "rb").read())
 
 # initialize the video stream, then allow the camera sensor to warm up
 print("[INFO] starting video stream...")
@@ -51,7 +44,6 @@ time.sleep(2.0)
 
 # start the FPS throughput estimator
 fps = FPS().start()
-
 
 # loop over frames from the video file stream
 while True:
@@ -85,7 +77,7 @@ while True:
 		
 
 		# filter out weak detections
-		if confidence > args["confidence"]:
+		if confidence > 0.9:
 			# compute the (x, y)-coordinates of the bounding box for
 			# the face
 			##print(n, "oi eu sou fraco")
@@ -117,7 +109,7 @@ while True:
 
 			# draw the bounding box of the face along with the
 			# associated probability
-			if proba > args["fortify"]:
+			if proba > 0.8:
 				text = "{}: {:.2f}%".format(name, proba * 100)
 				y = startY - 10 if startY - 10 > 10 else startY + 10
 				cv2.rectangle(frame, (startX, startY), (endX, endY),
@@ -125,7 +117,8 @@ while True:
 				cv2.putText(frame, text, (startX, y),
 					cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
 			else:
-				maluco = "maluco_estranho"
+				# print("Torrrrque,meuuuuuu!!!!!")
+				maluco = "desconhecido"
 				y = startY - 10 if startY - 10 > 10 else startY + 10
 				cv2.rectangle(frame, (startX, startY), (endX, endY),
 					(0, 0, 255), 2)
