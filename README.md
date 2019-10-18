@@ -34,6 +34,8 @@ https://www.liquidweb.com/kb/creating-virtual-environment-ubuntu-16-04/
 Bibliotecas:
 -open_cv2;
 -imutils;
+-pillow;
+-shutils;
 -sklearn;
 -nativas: numpy, os, pickle;
 
