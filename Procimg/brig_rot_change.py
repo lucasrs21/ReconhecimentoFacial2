@@ -13,14 +13,13 @@ class Brig_rot_change:
         self.rotate
 
     def Rotate(self):
-        Cria_dir('/new_dataset')
+        Cria_dir('new_dataset')
         # Bloco responsavel pela mudanca de rotacao das imagens,
         # uma a uma, para os angulos definidos na lista rotate
         self.base_dir = os.path.dirname(__file__)
         self.rotate = [-15, -20, -25, -30, -35, 15, 20, 25, 30, 35]
         for dir in os.listdir(self.base_dir + '/updated_dataset'):
-            if not os.path.exists(self.base_dir + '/new_dataset/' + dir):
-                os.makedirs(self.base_dir + '/new_dataset/' + dir)
+            Cria_dir('new_dataset/' + dir)
             for file in os.listdir(self.base_dir + '/updated_dataset/' + dir):
                 for i in self.rotate:
                     img = Image.open(self.base_dir + '/updated_dataset/' + dir + '/' + file)
@@ -35,8 +34,7 @@ class Brig_rot_change:
         self.base_dir = os.path.dirname(__file__)
         self.bright = [0.4, 0.5, 0.6, 0.7]
         for dir in os.listdir(self.base_dir + '/new_dataset'):
-            if not os.path.exists(self.base_dir + '/dataset/' + dir):
-                os.makedirs(self.base_dir + '/dataset/' + dir)
+            Cria_dir('dataset/' + dir)
             for file in os.listdir(self.base_dir + '/new_dataset/' + dir):
                 for i in self.bright:
                     img = Image.open(self.base_dir + '/new_dataset/' + dir + '/' + file)

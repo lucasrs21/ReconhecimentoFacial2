@@ -25,8 +25,7 @@ class Crop_imagem:
 		# Loop through all images and strip out faces
 		count = 0
 		for dir in os.listdir(self.base_dir + '/initial_dataset'):
-			if not os.path.exists(self.base_dir + '/updated_dataset/' + dir):
-				os.makedirs(self.base_dir + '/updated_dataset/' + dir)
+			Cria_dir('updated_dataset/' + dir)
 			for file in os.listdir(self.base_dir + '/initial_dataset/' + dir):
 				file_name, file_extension = os.path.splitext(file)
 				if (file_extension in ['.png','.jpg']):
