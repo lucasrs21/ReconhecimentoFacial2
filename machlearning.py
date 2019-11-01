@@ -97,9 +97,19 @@ def extract_embeddings():
     # Saida de embeddings + nomes
     print("[INFO] Serializando {} encodings...".format(total))
     data = {"embeddings": knownEmbeddings, "names": knownNames}
-    f = open(embeddings, "wb")
-    f.write(pickle.dumps(data))
-    f.close()
+    while True:
+        n = input("O arquivo embeddings já existe? [y/n] \n")
+        if n == 'y' or n == 'Y':
+            f = open(embeddings, "ab")
+            f.write(pickle.dumps(data))
+            f.close
+            break
+        elif n == 'n' or n == 'N':
+            f = open(embeddings, "wb")
+            f.write(pickle.dumps(data))
+            f.close()
+        else:
+            continue
 
 # Funcao que treina a rede neural a partir do arquivo de embeddings &
 # gera os arquivo recognizer e le (ambos são '.pickle').
