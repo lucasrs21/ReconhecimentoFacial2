@@ -22,10 +22,15 @@ class Brig_rot_change:
             Cria_dir('new_dataset/' + dir)
             for file in os.listdir(self.base_dir + '/updated_dataset/' + dir):
                 for i in self.rotate:
-                    img = Image.open(self.base_dir + '/updated_dataset/' + dir + '/' + file)
-                    file_name, file_extension = os.path.splitext(file)
-                    name = file_name + str(i) + file_extension
-                    img.rotate(i, expand=True).save(self.base_dir + '/new_dataset/' + dir + '/' + name,'jpeg')
+                    try:
+                        img = Image.open(self.base_dir + '/updated_dataset/' + dir + '/' + file)
+                        file_name, file_extension = os.path.splitext(file)
+                        name = file_name + str(i) + file_extension
+                        img.rotate(i, expand=True).save(self.base_dir + '/new_dataset/' + dir + '/' + name,'jpeg')
+                    except (OSError, FileNotFoundError):
+                        os.remove(self.base_dir + '/updated_dataset/' + dir + '/' + file)
+                        print('Frame {} foi deletado'.format(file))
+                        break
 
     def Bright(self):
         Cria_dir('/dataset')
