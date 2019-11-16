@@ -12,38 +12,20 @@ DEPLOYMENT: --------------------------------------------------------------------
 *pastas nomeadas com o nome da pessoa e dentro delas fotos desta pessoa*
 |----   /fulano
 |------     *fotos do fulano*
-|-- /in 
-*fotos sem tratamento*
-|-- /model_data
-|---- /deploy.prototxt
-|---- /weights.caffemodel
 |-- /face_detection_model
-|----  /deploy.prototxt
-|----  /res10_300x300_ssd_iter_140000.caffemodel
+|----   deploy.prototxt
+|----   res10_300x300_ssd_iter_140000.caffemodel
 |-- /output
-|----  /embeddings.pickle
-|----  /le.pickle
-|----  /recognizer.pickle
-|-- /Procimg
-|---- /__pycache__
-|---- /videos
-|---- /model_data
-|---- /brig_rot_change.py
-|---- /cria_dir.py 
-|---- /crop_imagem.py 
-|---- /photos_by_video.py 
-|---- /main.py 
-|---- /Pipfile
-|---- /Pipfile.lock
-
+|----   embeddings.pickle
+|----   le.pickle
+|----   recognizer.pickle
+|-- /__pycache__
+|-- /videos
 *videos nomeados com o nome do fulano a ser cadastrada*
-|-- /BrigChange(25.10).py
-|-- /machinelearning.py
-|-- /main.py
-|-- /openface_nn4.small2.v1.t7
-|-- /Pipfile
-|-- /Pipfile.lock
-|-- /recognize_video.py
+|-- codigo_foto_por_video.py
+|-- extract_embeddings.py
+|-- train_model.py
+|-- recognize_video.py
 
 PREREQUISITES: ---------------------------------------------------------------------------------
 Necessário a criação de um ambiente (enviroment) usando Virtualenv:
@@ -54,9 +36,8 @@ Bibliotecas:
 -imutils;
 -pillow;
 -shutils;
--scikit-learn(sklearn);
--numpy;
--nativas: time, os, pickle;
+-sklearn;
+-nativas: numpy, os, pickle;
 
 ----------- melhorar README: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2 ----------
 
@@ -66,13 +47,15 @@ RUNNING: -----------------------------------------------------------------------
 *será utlizado pelo código train_model para treinar a rede neural*
 *Passo 4.0 é o código de reconhecimento facial que será o código principal (main code)*
 
-1.0) Run no main.py contido na pasta Procimg(F5 no vscode/ chamando no terminal), essa etapa se trata
-do tratamento e formação do dataset;
+1.0) Run o código "codigo_foto_por_video.py" (F5 no vscode/executando pelo terminal)
+     1.1) Caso tenha um vídeo já gravado do seu rosto, coloque na pasta /Diretorio_Ambiente/videos com o
+     nome do indivíduo a ser cadastrado
 
-2.0) Run no machinelearning.py (F5 no vscode/chamando no terminal), essa etapa é responsável pela leitura
-e conversão do dataset em vetores, além de gerar três arquivos ".pickle" que contém os vetores e nomes dos cadatrados;
+2.0) Run o código "extract_embeddings.py" (F5 no vscode/executando pelo terminal);
 
-3.0) Run o código "recognize_video.py" para detectar e reconhecer as faces (F5 no vscode/executando pelo terminal).
+3.0) Run o código "train_model.py" (F5 no vscode/executando pelo terminal);
+
+4.0) Run o código "recognize_video.py" para detectar e reconhecer as faces (F5 no vscode/executando pelo terminal).
 
 ATENÇÃO : os arquivos devem se encontrar no mesmo diretório para que o código possa funcionar.
 

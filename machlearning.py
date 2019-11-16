@@ -2,17 +2,16 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 from imutils import paths
 import numpy as np
-3import imutils
+import imutils
 import pickle
 import cv2
 import os
-
 
 # Coleta de arquivos necessarios e pasta de saida.
 basedir = os.path.dirname(__file__)
 output = basedir + "/output"
 
-# Análise de dataset e criação do embeddings.pickle. 
+# Analise de dataset e criacao do embeddings.pickle. 
 def extract_embeddings():
     dataset = basedir + "/dataset"
     embeddings = output + "/embeddings.pickle"
@@ -98,13 +97,13 @@ def extract_embeddings():
     print("[INFO] Serializando {} encodings...".format(total))
     data = {"embeddings": knownEmbeddings, "names": knownNames}
     while True:
-        n = input("Novo cadastro? [y/n] \n")
+        n = input("O arquivo embeddings já existe? [y/n] \n")
         if n == 'y' or n == 'Y':
             f = open(embeddings, "ab")
             f.write(pickle.dumps(data))
             f.close
             break
-        elif n == 'n' or n == 'Y':
+        elif n == 'n' or n == 'N':
             f = open(embeddings, "wb")
             f.write(pickle.dumps(data))
             f.close()
