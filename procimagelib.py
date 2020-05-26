@@ -6,9 +6,8 @@ from PIL import Image, ImageEnhance
 import shutil
 
 def Cria_dir(y):
-    ¨¨¨ Funcao responsavel pela criacao de diretorios
-        baseados em um diretorio base (base_dir)
-    ¨¨¨
+    # Funcao responsavel pela criacao 
+    # de diretorios baseados em um diretorio base (base_dir)
 	# Define o diretório base
 	base_dir = os.path.dirname(__file__)
 	# Cria um novo diretório caso esse já não exista
@@ -73,12 +72,11 @@ class Brig_rot_change:
         self.rotate
 
     def Rotate(self):
-        ¨¨¨ Bloco responsavel pela mudanca de rotacao das imagens, 
-            uma a uma, para os angulos definidos na lista rotate.
-        ¨¨¨
+        #Bloco responsavel pela mudanca de rotacao das imagens, 
+        # uma a uma, para os angulos definidos na lista rotate.
         Cria_dir('new_dataset')
         self.base_dir = os.path.dirname(__file__)
-        self.rotate = [-15, -20, -25, -30, -35, 15, 20, 25, 30, 35]
+        self.rotate = [-15, -20, -25, -30, -35, 0, 15, 20, 25, 30, 35]
         for dir in os.listdir(self.base_dir + '/updated_dataset'):
             Cria_dir('new_dataset/' + dir)
             for file in os.listdir(self.base_dir + '/updated_dataset/' + dir):
@@ -94,12 +92,11 @@ class Brig_rot_change:
                         break
 
     def Bright(self):
-        ¨¨¨ Bloco responsavel pela mudanca de brilho das imagens,
-            uma a uma, para as porcentagens definidas na lista bright
-        ¨¨¨
+        #Bloco responsavel pela mudanca de brilho das imagens,
+        # uma a uma, para as porcentagens definidas na lista bright
         Cria_dir('/dataset')
         self.base_dir = os.path.dirname(__file__)
-        self.bright = [0.4, 0.5, 0.6, 0.7]
+        self.bright = [0.4, 0.5, 0.6, 0.7, 1.4, 1.5, 1.6, 1.7]
         for dir in os.listdir(self.base_dir + '/new_dataset'):
             Cria_dir('dataset/' + dir)
             for file in os.listdir(self.base_dir + '/new_dataset/' + dir):
@@ -122,7 +119,7 @@ class Photos_by_video:
 
     def web_or_video(self):
         self.base_dir = os.path.dirname(__file__)
-        self.entrada = input('Selecione o método de captura: (web/video)')
+        self.entrada = input('Selecione o método de captura [web/video]: ')
         if self.entrada == 'video':
             self.x = input('Nome do vídeo: ')
             formato_video = input('Formato do vídeo: ')

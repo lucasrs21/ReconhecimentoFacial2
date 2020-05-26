@@ -37,7 +37,7 @@ class Brig_rot_change:
         # Bloco responsavel pela mudanca de brilho das imagens,
         # uma a uma, para as porcentagens definidas na lista bright
         self.base_dir = os.path.dirname(__file__)
-        self.bright = [0.4, 0.5, 0.6, 0.7]
+        self.bright = [0.4, 0.5, 0.6, 0.7, 1.4, 1.5, 1.6, 1.7]
         for dir in os.listdir(self.base_dir + '/new_dataset'):
             Cria_dir('dataset/' + dir)
             for file in os.listdir(self.base_dir + '/new_dataset/' + dir):

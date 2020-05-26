@@ -80,7 +80,6 @@ while True:
 		if confidence > 0.9:
 			# compute the (x, y)-coordinates of the bounding box for
 			# the face
-			##print(n, "oi eu sou fraco")
 			
 			box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
 			(startX, startY, endX, endY) = box.astype("int")
@@ -109,20 +108,19 @@ while True:
 
 			# draw the bounding box of the face along with the
 			# associated probability
-			if proba > 0.8:
+			if proba > 0.3:
 				text = "{}: {:.2f}%".format(name, proba * 100)
 				y = startY - 10 if startY - 10 > 10 else startY + 10
 				cv2.rectangle(frame, (startX, startY), (endX, endY),
-					(0, 0, 255), 2)
+					(0, 255, 0), 2)
 				cv2.putText(frame, text, (startX, y),
-					cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
+					cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 1)
 			else:
-				# print("Torrrrque,meuuuuuu!!!!!")
-				maluco = "desconhecido"
+				unknown = "desconhecido"
 				y = startY - 10 if startY - 10 > 10 else startY + 10
 				cv2.rectangle(frame, (startX, startY), (endX, endY),
 					(0, 0, 255), 2)
-				cv2.putText(frame, maluco, (startX, y),
+				cv2.putText(frame, unknown, (startX, y),
 					cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
 
 		

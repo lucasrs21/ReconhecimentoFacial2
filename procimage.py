@@ -5,7 +5,6 @@ from PIL import Image, ImageEnhance
 import shutil
 from procimagelib import Brig_rot_change, Crop_imagem, Photos_by_video
 
-
 captura = Photos_by_video()
 captura.web_or_video()
 captura.extrai_frames()
