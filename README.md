@@ -88,7 +88,7 @@ Run reconface.py to start the face recognition
 
 Note: It's necessary to have 2 different people in the dataset to run properly the face recognition.
 
-## Explanition
+## Explanation
 The project is divided between 3 main codes: First one is the resgistring code (Procimage.py); second one is the code responsable for tranining the Neural Net to recognize the faces in your dataset (machlearninig.py) and the third one is the code responsable for using the trained net to perform the actual recognition of the registered faces (reconface.py).
 
 The 'procimage.py' is associated to the processing of the image and the obtaining images. It has 2 different ways to capture images for the registration. By webcam live or by video.
