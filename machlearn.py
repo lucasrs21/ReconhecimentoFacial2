@@ -8,7 +8,7 @@ import cv2
 import os
 
 # Coleta de arquivos necessarios e pasta de saida.
-basedir = os.path.dirname(__file__)
+basedir = os.path.dirname(os.path.abspath(__file__))
 output = basedir + "/output"
 
 # Analise de dataset e criacao do embeddings.pickle. 
