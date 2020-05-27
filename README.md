@@ -81,9 +81,11 @@ pip install scikit-learn
 
 ## Running
 * **Run procimage.py to register a single person.**
+
 Note: When running this code if you choose the option 'web' press 'q' to close the webcam window named 'frame' and start the processing of the images obtained.
 
 * **Run machlearn.py to train the neural network.**
+
 Note: It's necessary to have 2 different people in the dataset to run properly the face recognition.
 
 * **Run reconface.py to start the face recognition.**
