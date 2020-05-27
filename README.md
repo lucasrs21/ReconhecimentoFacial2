@@ -64,7 +64,7 @@ pip install opencv-contrib-python
 ```
 * imutils (v0.5.3)
 ```
-pip install imultils
+pip install imutils
 ```
 * pillow (v6.1.0)
 ```
@@ -74,19 +74,19 @@ pip install pillow
 ```
 pip install pytest-shutil
 ```
-* sklearn (0.21.3)
+* sklearn (v0.21.3)
 ```
 pip install scikit-learn
 ```
 
 ## Running
-Run procimage.py to register a single person
+* **Run procimage.py to register a single person**
+Note: When running this code if you choose the option 'web' press 'q' to close the webcam window named 'frame' and start the processing of the images obtained.
 
-Run machlearn.py to train the neural network
-
-Run reconface.py to start the face recognition
-
+* **Run machlearn.py to train the neural network**
 Note: It's necessary to have 2 different people in the dataset to run properly the face recognition.
+
+* **Run reconface.py to start the face recognition**
 
 ## Explanation
 The project is divided between 3 main codes: First one is the resgistring code (Procimage.py); second one is the code responsable for tranining the Neural Net to recognize the faces in your dataset (machlearninig.py) and the third one is the code responsable for using the trained net to perform the actual recognition of the registered faces (reconface.py).
@@ -97,6 +97,10 @@ First the captured images are saved in the file named "initial_dataset" (where y
 The 'machlearn.py' is the traning phase of the Neural Net and it uses ".pickle" files to store the data referent the labels and face paterns, the generated files are called "le" for labels, "embbedings" for face paterns and "recognizer" for the file created from the merging of the other two.
 
 The 'reconface.py' is the code that uses the trained Neural Net to perform the recognition. It is done through the usage of the ".pickle" file named recognizer, whitch contains all the data referent to the faces on the dataset.
+
+## Vídeo
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/3_rxj71geVk/0.jpg)](http://www.youtube.com/watch?v=3_rxj71geVk "Projeto de reconhecimento facial")
 
 ## Built With
 
@@ -110,6 +114,7 @@ The 'reconface.py' is the code that uses the trained Neural Net to perform the r
 * [**Lucas Rodrigues**](https://github.com/lucasr21)
 * [**Matheus Augusto**](https://github.com/MatheusMABR)
 * [**Mauro Yoshio**](https://github.com/mayokogitgud)
+* [**Leonardo Moreno**](https://github.com/leopmoreno) - Management of the team.
 
 ## License
 
@@ -117,6 +122,4 @@ This project is free and non-profit. The marketing of it is prohibited.
 
 ## Acknowledgments
 * Based On: [Adrian Rosebrock](https://www.pyimagesearch.com/author/adrian/) - [Face detection with OpenCV and deep learning](https://www.pyimagesearch.com/2018/02/26/face-detection-with-opencv-and-deep-learning/)
-
-* [**Leonardo Moreno**](https://github.com/leopmoreno) - Management of the team.
 
