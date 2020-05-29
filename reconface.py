@@ -12,7 +12,7 @@ import cv2
 import os
 
 # Carregando arquivos necessários ao programa
-basedir = os.path.dirname(__file__)
+basedir = os.path.dirname(os.path.abspath(__file__))
 output = basedir + "/output"
 face_model = basedir + "/face_detection_model"
 
