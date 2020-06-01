@@ -96,7 +96,11 @@ The project is divided between 3 main codes: First one is the resgistring code (
 The 'procimage.py' is associated to the processing of the image and the obtaining images. It has 2 different ways to capture images for the registration. By webcam live or by video.
 First the captured images are saved in the file named "initial_dataset" (where your original images will be). In the second step, the faces of the images are cut to improve precessing and reduce errors, and will be saved in "updated_dataset". In the third and fourth steps, the images are rotated and changed in brightness to diversify the dataset. They are saved in the "new_dataset" and "dataset" folders respectively. The "dataset" folder is the final folder that facial recognition will use to train.
 
+Note: When you run 'procimage.py' some questions is going to appear: 'Selecione o método de captura [web/video]:' translating from portuguese 'Select the capture method [web / video]:'. If you choose 'web', the webcam will capture images in a specific frequency/time (if it is necessary, you can change it in 'FPS'). If you choose 'video', it is needed to specify the name of the video and your format (ex: '.mp4').
+
 The 'machlearn.py' is the traning phase of the Neural Net and it uses ".pickle" files to store the data referent the labels and face paterns, the generated files are called "le" for labels, "embbedings" for face paterns and "recognizer" for the file created from the merging of the other two.
+
+Note: When you run 'machlearn.py' the following questions is going to appear: 'O arquivo embeddings já existe? [y/n]' or 'Does the embeddings file already exist? [y/n]'. If you choose 'y' (yes) the code will add new face data to the embbedings, process of 'append'. If you choose 'n' (no) and the embbedings alredy exists the code will overwrite the embbedings with the new face data. 
 
 The 'reconface.py' is the code that uses the trained Neural Net to perform the recognition. It is done through the usage of the ".pickle" file named recognizer, whitch contains all the data referent to the faces on the dataset.
 
